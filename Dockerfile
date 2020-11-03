@@ -1,9 +1,10 @@
-FROM ruby:2.7.1-alpine3.11
+FROM ruby:2.7-slim
 
-MAINTAINER Michael Karlesky <michael@karlesky.net>
+MAINTAINER LEMA LTD <develop@hunterhelp.ru>
 
 
-RUN apk --no-cache add \
+# RUN apk --no-cache add \
+RUN apt-get -y update && apt-get install -y \
   coreutils \
   gcc \
   gcovr \
