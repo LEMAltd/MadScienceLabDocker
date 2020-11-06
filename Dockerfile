@@ -2,15 +2,6 @@ FROM ruby:2.7-slim
 
 MAINTAINER LEMA LTD <develop@hunterhelp.ru>
 
-
-# RUN apk --no-cache add \
-RUN apt-get -y update && apt-get install -y \
-  coreutils \
-  gcc \
-  gcovr \
-  valgrind \
-  libc-dev
-
 ##
 ## Copy assets for inclusion in image
 ##
@@ -20,21 +11,43 @@ RUN apt-get -y update && apt-get install -y \
 ##     https://rubygems.org/gems/ceedling/versions/0.30.0/dependencies
 ## - The easiest way to vendor a gem is `gem fetch <name> -v <version>` in assets/gems.
 ##
-
 COPY assets/gems /assets/gems
 
-# Install Ceedling, CMock, Unity
-RUN set -ex \
+# RUN apk --no-cache add \
+RUN apt-get -y update && apt-get install -y \
+  coreutils \
+  gcc \
+  gcovr \
+  valgrind \
+  libc-dev \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
+  && set -ex \
   # Prevent documentation installation taking up space
   echo -e "---\ngem: --no-ri --no-rdoc\n...\n" > .gemrc \
   # Install Ceedling and related gems
   && gem install --force --local /assets/gems/*.gem \
   # Cleanup
   && rm -rf /assets \
-  && rm .gemrc
+  && rm .gemrc \
+  && mkdir /project
 
 
-RUN mkdir /project
+
+
+
+# # Install Ceedling, CMock, Unity
+# RUN set -ex \
+#   # Prevent documentation installation taking up space
+#   echo -e "---\ngem: --no-ri --no-rdoc\n...\n" > .gemrc \
+#   # Install Ceedling and related gems
+#   && gem install --force --local /assets/gems/*.gem \
+#   # Cleanup
+#   && rm -rf /assets \
+#   && rm .gemrc
+
+
+# RUN mkdir /project
 
 ##
 ## Add base project path to $PATH (for help scripts, etc.)
