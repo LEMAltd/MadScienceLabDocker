@@ -14,7 +14,7 @@ MAINTAINER LEMA LTD <develop@hunterhelp.ru>
 COPY assets/gems /assets/gems
 
 # RUN apk --no-cache add \
-RUN apt-get -y update && apt-get install -y \
+RUN apt-get -y update && apt-get install --no-install-recommends -y \
   coreutils \
   gcc \
   gcovr \
