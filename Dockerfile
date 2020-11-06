@@ -21,6 +21,7 @@ RUN apt-get -y update && apt-get install -y \
   valgrind \
   libc-dev \
   && apt-get clean \
+  && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && set -ex \
   # Prevent documentation installation taking up space
