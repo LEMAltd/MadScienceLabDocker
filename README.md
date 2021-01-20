@@ -17,5 +17,5 @@ Cross-compilation C unit testing environment with Unity, CMock, and Ceedling.
   * Ruby 2.7.1
 
 ## Usage
-`docker run -it --rm -v <local project path>:/project throwtheswitch/madsciencelab[:tag]`
+`docker run -it --rm -v <local project path>:/project lemaltd/madsciencelab[:tag]`
 
