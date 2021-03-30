@@ -18,6 +18,7 @@ RUN apt-get -y update && apt-get install --no-install-recommends -y \
   coreutils \
   gcc \
   gcovr \
+  cppcheck \
   valgrind \
   libc-dev \
   && apt-get clean \
